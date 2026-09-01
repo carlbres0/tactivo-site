@@ -3,9 +3,12 @@
 
   THESIS: A season has four corners — technical, tactical, physical,
   psych/social — and Tactivo's real claim is that it plans against all four,
-  not just tonight's drill. The page is built as those four colour-owned
-  regions. It refuses the alternating feature-scroll and the uniform grid of
-  icon-heading-text cards.
+  not just tonight's drill. The page is built as colour-owned regions per
+  corner it has a deep-dive for (Technical, Tactical, Physical); Psych/Social
+  stays in the rail and the coverage payoff as a tracked category, with no
+  deep-dive section, since the community/discover feature it would have shown
+  is not committed. It refuses the alternating feature-scroll and the uniform
+  grid of icon-heading-text cards.
 
   OWN-WORLD: The app's own system. Ink #0B0F10 ground, Archivo 400–800, and
   the four-corner palette owning whole regions instead of dotting accents —
@@ -22,8 +25,14 @@
   the page's signature device and its structure.
 
   FORM: Four-corner board; candidate 5 of 7 on the resonance list; seed key
-  d352c591, assigned index 5. Staging: one full-width region per corner, each
-  composed differently, separated by the rail.
+  d352c591, assigned index 5. Staging: one full-width region per corner with a
+  committed feature, each composed differently, separated by the rail.
+
+  2026-09-01 — Carl: rewrote the hero to lead with the AI mechanism and a
+  six-item perk strip (generate, track, save, favourite, 1,000+ variations,
+  free); dropped the Psych/Social deep-dive (the community/discover feature it
+  showed may be cut); reduced every drill-count claim on this page to one
+  line, "over 1,000 variations of drills" — no breakdown, no other digit.
 -->
 <!DOCTYPE html>
 <html lang="en-GB">
@@ -31,7 +40,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tactivo — the home for football coaches</title>
-<meta name="description" content="Tactivo's AI planner builds your football session in about thirty seconds, sized to the age group, the players who turned up and the time you have, from 245 coach-authored drills and 1,425 age-appropriate variations. Every drill animated. Coming soon on iOS and Android.">
+<meta name="description" content="Tactivo's AI planner builds your football session in seconds, sized to the age group, the players who turned up and the time you have, from over 1,000 drill variations. Free to use. Coming soon on iOS and Android.">
 <link rel="canonical" href="https://tactivo.co.uk/">
 <meta name="theme-color" content="#0b0f10">
 <link rel="icon" href="favicon.png" type="image/png">
@@ -91,12 +100,20 @@
   <div class="wrap">
     <div>
       <p class="standfirst">Wednesday, 6:15pm. <b>Nine turned up, not fourteen.</b> You have the pitch for an hour.</p>
-      <h1>Know what you're coaching <em>before</em> you get there.</h1>
-      <p class="lede">Tactivo's AI planner builds the whole session: warm-up, main work, game. Sized to the age group, the players in front of you and the time you actually have, with every drill animated so you can see it before you coach it.</p>
+      <h1>Your next session, planned by <em>AI</em> in seconds.</h1>
+      <p class="lede">Tell Tactivo what you're working on and who's coming, and it builds the whole session for you. It tracks what you've covered all season, so you always know what's next.</p>
       <div class="actions">
         <a class="btn" href="#access">Get early access</a>
         <a class="btn btn--line" href="#corners">See how it plans</a>
       </div>
+      <ul class="perks">
+        <li>Generate sessions</li>
+        <li>Track your season</li>
+        <li>Save drills</li>
+        <li>Favourite sessions</li>
+        <li>1,000+ drill variations</li>
+        <li>Free to use</li>
+      </ul>
       <p class="fineprint">Free while we're in early access. No card. One email when it opens.</p>
     </div>
 
@@ -244,28 +261,6 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════ PSYCH / SOCIAL -->
-<section class="corner" style="--c: var(--social)" aria-labelledby="soc-h">
-  <div class="wrap soc-split">
-    <div class="shotwrap up"><span><img src="img/app-community.png" alt="The Tactivo community feed: coaches posting sessions they have run, with the drill diagram, the age group and how it went." width="786" height="1400" loading="lazy"></span></div>
-    <div class="up">
-      <p class="kicker">Psych / Social</p>
-      <h2 class="head" id="soc-h">The bit no drill library gives you: other coaches.</h2>
-      <p class="say">Share a session you ran and say honestly how it went. Save one that worked for somebody else. Message the coach who posted it and ask what you would have to change for your lot.</p>
-      <div class="quotewall">
-        <div class="saidline">
-          <p>Ran this with the U11s tonight. The six-second rule turned a quiet group into the loudest session we have had all season.</p>
-          <cite>Example session note. Written by us, not a customer quote.</cite>
-        </div>
-        <div class="saidline">
-          <p>Two weeks of defending the box and we finally kept a clean sheet. Simple drill, repeated until it was boring, then it worked.</p>
-          <cite>Example session note. Written by us, not a customer quote.</cite>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ═══════════════════════════════════════════════ the payoff -->
 <section class="payoff" aria-labelledby="pay-h">
   <div class="wrap">
@@ -311,17 +306,12 @@
     <div class="libhead">
       <div>
         <p class="kicker" style="--c: var(--technical)">The library</p>
-        <h2 class="head" id="lib-h">Written by coaches. All 245 of them.</h2>
+        <h2 class="head" id="lib-h">AI plans the session. Coaches write every drill.</h2>
       </div>
-      <div class="counts">
-        <div><b>245</b><span>coach-authored drills</span></div>
-        <div><b>1,425</b><span>age-appropriate variations</span></div>
-        <div><b>4</b><span>corners, every one covered</span></div>
-      </div>
+      <p class="libstat">Over 1,000 variations of drills.</p>
     </div>
 
-    <p class="say">Every drill carries its setup, the steps in order, a coaching point worth saying out loud, a progression for when it lands early and a regression for when it does not. Each one is also written for the age bands it suits, with its own pitch size and its own rules.</p>
-    <p class="say dim" style="margin-bottom: 26px">Count every age band and every difficulty version as its own way to run the session and the library comes to <b style="color: var(--text)">1,425</b>. A real sample of what is in there:</p>
+    <p class="say" style="margin-bottom: 26px">Every drill carries its setup, the steps in order, a coaching point worth saying out loud, a progression for when it lands early and a regression for when it does not. A real sample of what is in there:</p>
 
     <div class="titles up" aria-label="A sample of drill titles from the Tactivo library">
       <span>5v2 Keep-Ball Warm-Up</span>
@@ -346,7 +336,7 @@
       <span>Animal Walks</span>
       <span>Colour Reaction Cones</span>
       <span>Cool Down &amp; Review</span>
-      <span class="more">+ 223 more</span>
+      <span class="more">and more</span>
     </div>
   </div>
 </section>

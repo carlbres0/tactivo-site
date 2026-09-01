@@ -197,8 +197,27 @@ h1 em {
 
 .hero .actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
+.perks {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0 0;
+  padding: 0;
+}
+
+.perks li {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--body);
+  border: 1px solid var(--hair-2);
+  border-radius: 999px;
+  padding: 6px 14px;
+  white-space: nowrap;
+}
+
 .hero .fineprint {
-  margin: 18px 0 0;
+  margin: 16px 0 0;
   font-size: 14px;
   color: var(--faint);
 }
@@ -536,22 +555,6 @@ p.say.dim { color: var(--muted); }
 .resize tbody tr:last-child td { border-bottom: 0; }
 .resize .em { color: var(--physical); font-weight: 700; }
 
-/* — social: community — */
-
-.soc-split {
-  display: grid;
-  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
-  gap: 56px;
-  align-items: center;
-}
-
-.soc-split .shotwrap { width: 100%; max-width: 300px; }
-
-.quotewall { display: grid; gap: 20px; }
-
-.saidline { border-top: 2px solid var(--social); padding-top: 16px; }
-.saidline p { margin: 0; font-size: 17px; color: var(--body); }
-.saidline cite { display: block; margin-top: 6px; font-style: normal; font-size: 14px; color: var(--faint); }
 
 /* ============================================================ coverage payoff */
 
@@ -639,17 +642,13 @@ p.say.dim { color: var(--muted); }
   margin-bottom: 34px;
 }
 
-.counts { display: flex; gap: 40px; flex-wrap: wrap; }
-
-.counts div b {
-  display: block;
-  font-size: 40px;
+.libstat {
+  font-size: 22px;
   font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1;
+  letter-spacing: -0.015em;
+  color: var(--technical);
+  margin: 0;
 }
-
-.counts div span { font-size: 14px; color: var(--muted); }
 
 .titles { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
 
@@ -870,14 +869,12 @@ footer.site .imprint {
   .hero .wrap,
   .tech-grid,
   .tac-split,
-  .soc-split,
   .payoff .wrap { grid-template-columns: 1fr; gap: 44px; }
 
   .hero { padding-top: 64px; }
   .hero-shot { justify-self: start; margin-bottom: -40px; max-width: 330px; }
   .hero-shot figcaption { left: auto; right: -8px; bottom: 30px; }
   .tac-split .shotwrap,
-  .soc-split .shotwrap,
   .payoff .shotwrap { justify-self: start; }
   .corner { padding: 72px 0; }
   .walk { grid-template-columns: 1fr; gap: 40px; }
