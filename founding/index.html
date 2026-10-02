@@ -19,7 +19,7 @@ body { background: var(--paper); color: var(--ink); font-family: Archivo, system
 .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
 /* hero */
 .hero { background: var(--night); color: #fff; padding: 20px 0 28px; }
-.hero .wrap { display: grid; gap: 18px; grid-template-areas: "copy" "film" "lede"; }
+.hero .wrap { display: grid; gap: 18px; grid-template-areas: "copy" "film" "nobuy" "lede"; }
 .copy { grid-area: copy; display: flex; flex-direction: column; gap: 14px; }
 .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 16px; }
 .brand img { height: 24px; }
@@ -32,6 +32,8 @@ body { background: var(--paper); color: var(--ink); font-family: Archivo, system
 .tile.dark { background: #1E2428; padding: 7px; }
 .tile.none { padding: 0; }
 .tile.tm { background: var(--night); border: 1.5px solid rgba(255,255,255,.16); padding: 13px; }
+/* tmark_tile.png is the T-mark trimmed to its ink; the T is top-heavy (ink centroid 9% above its box centre), so it sits 1.5px low to read as centred */
+.tile.tm img { transform: translateY(1.5px); }
 .times { color: var(--lime); font-weight: 700; font-size: 22px; line-height: 1; }
 .prepared { font-size: 15px; font-weight: 700; color: var(--lime); letter-spacing: .2px; margin-top: -2px; }
 .meta { font-size: 13px; font-weight: 600; color: #9AA3A9; margin-top: -10px; }
@@ -76,17 +78,68 @@ section { margin-bottom: 34px; }
 .letter .sig { font-weight: 700; }
 .letter .contact { font-size: 15px; color: var(--muted); font-weight: 600; }
 .letter .contact a { color: var(--ink); font-weight: 700; }
+/* "nothing being sold", right under the film */
+.nobuy { grid-area: nobuy; justify-self: center; text-align: center; font-size: 15px; font-weight: 700; color: var(--lime); line-height: 1.35; max-width: 420px; }
+/* social proof: data-driven from proof.json */
+.proof-row { display: flex; flex-wrap: wrap; gap: 14px 22px; }
+.proof-row figure { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; }
+.proof-row .tile { width: 52px; height: 52px; border-radius: 13px; background: #fff; padding: 6px; box-shadow: 0 0 0 1px rgba(17,22,26,.08); }
+/* sticky CTA: a bottom bar on phones, a floating card bottom-right on desktop */
+.cta { position: fixed; z-index: 20; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px;
+       background: var(--night); color: #fff; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); box-shadow: 0 -6px 20px rgba(0,0,0,.25); }
+.cta span { flex: 1; font-size: 14px; font-weight: 700; line-height: 1.2; }
+.btn { appearance: none; border: 0; cursor: pointer; font: inherit; font-weight: 800; font-size: 16px; background: var(--lime); color: var(--night);
+       border-radius: 99px; padding: 13px 20px; white-space: nowrap; }
+.btn:focus-visible, .sheet input:focus-visible, .x:focus-visible { outline: 3px solid var(--lime); outline-offset: 2px; }
+body { padding-bottom: 72px; }
+/* the sheet: native <dialog> (inert background, Esc closes); bottom sheet on phones, centred card on desktop */
+.sheet { border: 0; padding: 0; margin: auto auto 0; width: 100%; max-width: 100%; max-height: 92vh; border-radius: 20px 20px 0 0;
+         background: var(--paper); color: var(--ink); overflow: auto; }
+.sheet::backdrop { background: rgba(11,15,16,.6); }
+.sheet .in { position: relative; padding: 24px 20px calc(20px + env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 14px; }
+.x { position: absolute; top: 10px; right: 10px; width: 40px; height: 40px; border: 0; border-radius: 99px; background: transparent; font-size: 26px; line-height: 1; cursor: pointer; color: var(--muted); }
+.sheet h2 { font-size: 23px; line-height: 1.15; font-weight: 800; letter-spacing: -0.2px; padding-right: 32px; }
+.sheet .sub { margin-top: 10px; font-size: 16px; line-height: 1.45; font-weight: 500; color: #2E353B; }
+.sheet form { display: flex; flex-direction: column; gap: 12px; }
+.sheet label { display: flex; flex-direction: column; gap: 5px; font-size: 14px; font-weight: 700; }
+.sheet input { font: inherit; font-size: 17px; font-weight: 500; padding: 12px 14px; border: 1.5px solid #C9CDC4; border-radius: 12px; background: #fff; color: var(--ink); }
+.sheet input[aria-invalid="true"] { border-color: #B3261E; }
+.err { font-size: 13px; font-weight: 600; color: #B3261E; }
+.sheet .btn { width: 100%; padding: 15px 20px; font-size: 17px; }
+.sheet .btn[disabled] { opacity: .6; cursor: default; }
+.mini { list-style: none; display: grid; gap: 6px; }
+.mini li { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #2E353B; }
+.mini li::before { content: "\2713"; width: 18px; height: 18px; flex-shrink: 0; border-radius: 99px; background: var(--night); color: var(--lime); font-size: 11px; font-weight: 800; display: grid; place-items: center; }
+.sheet .proof-row { gap: 8px 14px; }
+.sheet .proof-row figure { font-size: 13px; gap: 7px; }
+.sheet .proof-row .tile { width: 32px; height: 32px; border-radius: 8px; padding: 3px; }
+.sheet .pl { width: 100%; font-size: 12px; font-weight: 700; letter-spacing: .3px; color: var(--muted); }
+#sheet-h:focus, #done:focus { outline: none; }
+.privacy { font-size: 12px; color: var(--muted); font-weight: 500; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.done { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; padding: 18px 0 8px; }
+.done .big { width: 64px; height: 64px; border-radius: 99px; background: var(--lime); color: var(--night); font-size: 34px; font-weight: 800; display: grid; place-items: center; }
+.done p { font-size: 19px; font-weight: 700; line-height: 1.35; }
+.fail { font-size: 14px; font-weight: 600; color: #B3261E; }
+.fail a { color: var(--ink); }
 footer { background: var(--night); color: #fff; margin-top: 8px; }
 footer .wrap { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; padding-top: 18px; padding-bottom: 18px; font-size: 15px; font-weight: 600; }
 footer img { height: 26px; }
 footer a { margin-left: auto; color: var(--lime); font-weight: 700; text-decoration: none; }
 @media (min-width: 820px) {
   .hero { padding: 40px 0 44px; }
-  .hero .wrap { grid-template-columns: 1fr auto; grid-template-areas: "copy film" "lede film"; column-gap: 56px; row-gap: 20px; align-content: start; }
+  .hero .wrap { grid-template-columns: 1fr auto; grid-template-areas: "copy film" "lede film" "nobuy film"; grid-template-rows: 1fr auto 1fr; column-gap: 56px; row-gap: 20px; align-content: start; }
+  .nobuy { justify-self: start; text-align: left; align-self: start; margin-top: -4px; font-size: 17px; max-width: 520px; }
+  .hero { padding-top: 100px; }   /* room for the floating CTA above the film */
+  body { padding-bottom: 0; }
+  .cta { left: auto; right: 24px; bottom: auto; top: 16px; border-radius: 18px; padding: 12px 12px 12px 18px; max-width: 400px;
+         box-shadow: 0 10px 30px rgba(0,0,0,.35); border: 1.5px solid rgba(255,255,255,.12); }
+  .sheet { margin: auto; max-width: 480px; border-radius: 20px; }
+  .sheet .in { padding: 30px 28px 26px; }
   .copy { align-self: end; }
   .lede { align-self: start; max-width: 520px; }
   h1 { font-size: 52px; }
-  .film { width: min(400px, calc((100vh - 84px) * 9 / 16)); }
+  .film { width: min(400px, calc((100vh - 144px) * 9 / 16)); }
   .screens { grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .shot { display: block; }
   .cap { margin-top: 2px; }
@@ -101,7 +154,7 @@ footer a { margin-left: auto; color: var(--lime); font-weight: 700; text-decorat
   <div class="wrap">
     <div class="copy">
       <div class="brand" id="brand"><img src="assets/tmark_night.png" alt="">Tactivo</div>
-      <div class="lockup" id="lockup" hidden><span class="tile" id="crest"><img alt=""></span><span class="times" aria-hidden="true">×</span><span class="tile tm"><img src="assets/tmark_night.png" alt="Tactivo"></span></div>
+      <div class="lockup" id="lockup" hidden><span class="tile" id="crest"><img alt=""></span><span class="times" aria-hidden="true">×</span><span class="tile tm"><img src="assets/tmark_tile.png" alt="Tactivo"></span></div>
       <p class="prepared" id="prepared" hidden></p>
       <p class="meta" id="meta" hidden></p>
       <h1>Building Tactivo with <em>grassroots clubs</em></h1>
@@ -110,7 +163,8 @@ footer a { margin-left: auto; color: var(--lime); font-weight: 700; text-decorat
       <video id="film" src="video.mp4" poster="poster.jpg" controls playsinline preload="metadata"></video>
       <div class="endcard" id="endcard" aria-hidden="true" hidden><span class="tile" id="endcrest"><img alt=""></span><div class="endname" id="endname"></div></div>
     </div>
-    <p class="lede">Grassroots football runs on volunteers: people who finish a day's work and go straight to training, for the kids. Tactivo is a free app that makes that hour easier, and we want to build what comes next together with the clubs who use it.</p>
+    <p class="nobuy">Nothing to buy. Nothing to sign. Just your coaches' honest feedback.</p>
+    <p class="lede">Grassroots football runs on volunteers: people who finish a day's work and go straight to training, for the kids. Tactivo is an app that makes that hour easier, and we want to build what comes next together with the clubs who use it.</p>
   </div>
 </header>
 
@@ -122,6 +176,11 @@ footer a { margin-left: auto; color: var(--lime); font-weight: 700; text-decorat
       <div class="shot"><img src="assets/card_today_drill.jpg" alt="A 3D animated drill"><div class="cap">Drills you can see, with the coaching points</div></div>
       <div class="shot"><img src="assets/card_today_share.jpg" alt="Sending a session to another coach"><div class="cap">Shared with the other coaches at your club</div></div>
     </div>
+  </section>
+
+  <section id="proof" hidden>
+    <div class="sec-h"><span class="bar"></span><h2>Coaches at these clubs already use Tactivo</h2></div>
+    <div class="proof-row" id="proof-row"></div>
   </section>
 
   <section>
@@ -150,6 +209,31 @@ footer a { margin-left: auto; color: var(--lime); font-weight: 700; text-decorat
   </section>
 </main>
 
+<div class="cta" id="cta"><span>Become a Tactivo Founding Club</span><button class="btn" type="button" id="open" aria-haspopup="dialog">Register interest</button></div>
+
+<dialog class="sheet" id="sheet" aria-labelledby="sheet-h">
+  <div class="in">
+    <button class="x" type="button" id="close" aria-label="Close">&times;</button>
+    <div id="ask">
+      <h2 id="sheet-h" tabindex="-1">Building the future of grassroots football, with coaches, for coaches.</h2>
+      <p class="sub">Leave your name and number and Billy will call to set up a 15-minute chat.</p>
+    </div>
+    <form id="form" novalidate>
+      <label>Name<input id="f-name" name="name" autocomplete="name" maxlength="80" required aria-describedby="e-name"></label>
+      <span class="err" id="e-name" hidden>Please add your name.</span>
+      <label>Phone<input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="25" required aria-describedby="e-phone"></label>
+      <span class="err" id="e-phone" hidden>Please enter a UK phone number, like 07700 900123.</span>
+      <div class="hp" aria-hidden="true"><label>Company<input id="f-hp" name="company" tabindex="-1" autocomplete="off"></label></div>
+      <button class="btn" type="submit" id="submit">Book my chat</button>
+      <p class="fail" id="fail" role="alert" hidden>That didn't go through. <a href="#" id="retry">Try again</a> or email <a href="mailto:billy@tactivo.co.uk">billy@tactivo.co.uk</a>.</p>
+      <ul class="mini"><li>Nothing to buy or sign</li><li>15 minutes, at a time that suits you</li><li>Shape what we build next</li></ul>
+      <div class="proof-row" id="sheet-proof" hidden><span class="pl">Already using Tactivo</span></div>
+      <p class="privacy">We'll only use this to contact you about Tactivo.</p>
+    </form>
+    <div class="done" id="done" role="status" tabindex="-1" hidden><div class="big" aria-hidden="true">&#10003;</div><p id="done-msg"></p></div>
+  </div>
+</dialog>
+
 <footer><div class="wrap"><img src="assets/tmark_night.png" alt="Tactivo">15 clubs are already Founding Clubs.<a href="https://tactivo.co.uk">tactivo.co.uk</a></div></footer>
 
 <script>
@@ -157,8 +241,14 @@ footer a { margin-left: auto; color: var(--lime); font-weight: 700; text-decorat
 const NAME_IN = 50.9, NAME_OUT = 53.0;
 const slug = (new URLSearchParams(location.search).get('club') || '').toLowerCase();
 const $ = id => document.getElementById(id);
-(/^[a-z0-9-]{3,120}$/.test(slug) ? fetch('c/' + slug + '.json').then(r => r.ok ? r.json() : null) : Promise.resolve(null)).then(club => {
+// Lead endpoint (supabase/functions/founding-lead). text/plain keeps it a simple CORS request (no preflight), so keepalive works.
+const LEAD = 'https://rfykucyuwoyrgvkwkwiy.supabase.co/functions/v1/founding-lead';
+const post = body => fetch(LEAD, { method: 'POST', keepalive: true, headers: { 'content-type': 'text/plain' }, body: JSON.stringify(body) });
+let leadSlug = 'generic';                              // becomes the club's slug once its file loads
+const clubLoad = (/^[a-z0-9-]{3,120}$/.test(slug) ? fetch('c/' + slug + '.json').then(r => r.ok ? r.json() : null) : Promise.resolve(null)).catch(() => null);
+clubLoad.then(club => {
   if (!club || !club.name) return;                     // generic page
+  leadSlug = slug;
   const name = club.name;
   document.title = 'Tactivo Founding Clubs · ' + name;
   // lockup and end card stay hidden unless their crest actually loads (no empty image box, also on error)
@@ -175,6 +265,55 @@ const $ = id => document.getElementById(id);
   const tick = () => card.classList.toggle('on', v.currentTime >= NAME_IN && v.currentTime < NAME_OUT);
   v.addEventListener('timeupdate', tick); v.addEventListener('seeked', tick);
 }).catch(() => {});
+
+// Social proof: proof.json [{name, crest}]; entries without a crest render nothing, the section hides if none have one.
+fetch('proof.json').then(r => r.json()).then(list => {
+  const clubs = list.filter(c => c && c.crest && c.name);
+  if (!clubs.length) return;
+  for (const row of [$('proof-row'), $('sheet-proof')]) {
+    for (const c of clubs) {
+      const fig = document.createElement('figure'), tile = document.createElement('span'), img = new Image(), cap = document.createElement('figcaption');
+      tile.className = 'tile'; img.src = c.crest; img.alt = ''; cap.textContent = c.name;
+      tile.append(img); fig.append(tile, cap); row.append(fig);
+    }
+    row.hidden = false;
+  }
+  $('proof').hidden = false;
+}).catch(() => {});
+
+// Register interest: the tap alone notifies us; the sheet then asks for a name and number.
+const sheet = $('sheet'), form = $('form');
+let interestSent = false;
+$('open').addEventListener('click', () => {
+  if (!interestSent) { interestSent = true; clubLoad.then(() => post({ slug: leadSlug, stage: 'interest' }).catch(() => {})); }
+  sheet.showModal(); if (!$('ask').hidden) $('sheet-h').focus();   // land on the headline, not the close button
+});
+$('close').addEventListener('click', () => sheet.close());
+sheet.addEventListener('click', e => { if (e.target === sheet) sheet.close(); });   // tap on the backdrop
+// UK-friendly: 07…/01…/02… (10-11 digits) or +44 / 0044, spaces, dashes and brackets allowed; other + numbers accepted too.
+const phoneOk = p => { const d = p.replace(/[\s()-]/g, ''); return /^[0-9+()\s-]{7,25}$/.test(p) && (/^(\+44|0044)0?\d{9,10}$/.test(d) || /^0\d{9,10}$/.test(d) || /^\+\d{8,15}$/.test(d)); };
+const field = (input, err, ok) => { input.setAttribute('aria-invalid', String(!ok)); err.hidden = ok; return ok; };
+async function submit() {
+  const name = $('f-name').value.trim(), phone = $('f-phone').value.trim();
+  const okName = field($('f-name'), $('e-name'), name.length > 0 && name.length <= 80);
+  const okPhone = field($('f-phone'), $('e-phone'), phoneOk(phone));
+  if (!okName) return $('f-name').focus();
+  if (!okPhone) return $('f-phone').focus();
+  $('submit').disabled = true; $('submit').textContent = 'Sending…'; $('fail').hidden = true;
+  try {
+    await clubLoad;
+    const r = await post({ slug: leadSlug, stage: 'details', name, phone, hp: $('f-hp').value });
+    if (!r.ok) throw new Error(r.status);
+    $('done-msg').textContent = 'Thanks, ' + name.split(/\s+/)[0] + '. Billy will be in touch soon.';
+    form.hidden = true; $('ask').hidden = true; $('done').hidden = false; $('done').focus();
+  } catch (e) {
+    $('fail').hidden = false;
+  } finally {
+    $('submit').disabled = false; $('submit').textContent = 'Book my chat';
+  }
+}
+form.addEventListener('submit', e => { e.preventDefault(); submit(); });
+$('retry').addEventListener('click', e => { e.preventDefault(); submit(); });
 </script>
 </body>
 </html>
