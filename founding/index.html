@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Tactivo Founding Clubs</title>
+<!-- Personalised outreach page. ?club=<private slug> loads c/<slug>.json (one file per club, no served index, so links
+     can't be enumerated); unknown/missing slug = the generic page. Club text is only ever set with textContent. -->
+<style>
+@font-face { font-family: Archivo; font-weight: 500; src: url(fonts/Archivo-Medium.ttf); font-display: swap; }
+@font-face { font-family: Archivo; font-weight: 600; src: url(fonts/Archivo-SemiBold.ttf); font-display: swap; }
+@font-face { font-family: Archivo; font-weight: 700; src: url(fonts/Archivo-Bold.ttf); font-display: swap; }
+@font-face { font-family: Archivo; font-weight: 800; src: url(fonts/Archivo-ExtraBold.ttf); font-display: swap; }
+:root { --night: #0B0F10; --lime: #C8F323; --paper: #F5F6F1; --ink: #11161A; --muted: #59616A; --olive: #4C5E0E; --body-dark: #D5D9DC; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body { background: var(--paper); color: var(--ink); font-family: Archivo, system-ui, sans-serif; line-height: 1.4; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+/* hero */
+.hero { background: var(--night); color: #fff; padding: 20px 0 28px; }
+.hero .wrap { display: grid; gap: 18px; grid-template-areas: "copy" "film" "lede"; }
+.copy { grid-area: copy; display: flex; flex-direction: column; gap: 14px; }
+.brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 16px; }
+.brand img { height: 24px; }
+[hidden] { display: none !important; }
+/* co-brand lockup: club crest × Tactivo T-mark */
+.lockup { display: flex; align-items: center; gap: 12px; }
+.tile { width: 64px; height: 64px; border-radius: 16px; display: grid; place-items: center; flex-shrink: 0; }
+.tile img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+.tile.light { background: #fff; padding: 7px; }
+.tile.dark { background: #1E2428; padding: 7px; }
+.tile.none { padding: 0; }
+.tile.tm { background: var(--night); border: 1.5px solid rgba(255,255,255,.16); padding: 13px; }
+.times { color: var(--lime); font-weight: 700; font-size: 22px; line-height: 1; }
+.prepared { font-size: 15px; font-weight: 700; color: var(--lime); letter-spacing: .2px; margin-top: -2px; }
+.meta { font-size: 13px; font-weight: 600; color: #9AA3A9; margin-top: -10px; }
+h1 { font-size: 34px; line-height: 1.04; font-weight: 800; letter-spacing: -0.4px; }
+h1 em { font-style: normal; color: var(--lime); }
+.lede { grid-area: lede; font-size: 17px; line-height: 1.5; color: var(--body-dark); font-weight: 500; }
+/* film: the box is exactly the video's 9:16, so the end-card overlay lines up at any size */
+.film { grid-area: film; position: relative; width: 100%; max-width: 420px; aspect-ratio: 9 / 16; justify-self: center;
+        border-radius: 14px; overflow: hidden; background: #000; container-type: inline-size; }
+.film video { display: block; width: 100%; height: 100%; }
+.endcard { position: absolute; left: 7%; right: 7%; top: 75.6%; display: flex; flex-direction: column; align-items: center; gap: 1.8cqw;
+           pointer-events: none; opacity: 0; transition: opacity .6s ease; }
+.endcard.on { opacity: 1; }
+.endcard .tile { width: 10cqw; height: 10cqw; border-radius: 2.3cqw; box-shadow: 0 .4cqw 1.2cqw rgba(0,0,0,.45); }
+.endcard .tile.light, .endcard .tile.dark { padding: 1cqw; }
+.endname { text-align: center;
+           font-weight: 800; font-size: 4.4cqw; line-height: 1.12; color: #F4F3EE; letter-spacing: -0.1px;
+           text-shadow: 0 .3cqw .8cqw rgba(0,0,0,.55); }
+/* body */
+main.wrap { padding-top: 36px; padding-bottom: 12px; }
+section { margin-bottom: 34px; }
+.sec-h { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 10px; margin-bottom: 12px; }
+.sec-h h2 { font-size: 22px; font-weight: 800; letter-spacing: -0.2px; line-height: 1.15; }
+.bar { width: 26px; height: 6px; background: var(--lime); border-radius: 4px; flex-shrink: 0; }
+.chip { font-size: 11px; font-weight: 800; letter-spacing: 1.1px; background: var(--lime); color: var(--night); border-radius: 99px; padding: 5px 10px 4px; }
+.note-s { font-size: 13px; color: var(--muted); font-weight: 600; }
+.screens { display: grid; gap: 10px; }
+.shot { display: grid; grid-template-columns: 44% 1fr; gap: 12px; align-items: center; }
+.shot img { display: block; width: 100%; height: auto; }
+.cap { font-size: 16px; font-weight: 700; line-height: 1.3; }
+.letter { margin-top: 30px; }
+.founding .tag { font-size: 17px; font-weight: 800; color: var(--olive); margin: -4px 0 10px; }
+.founding p { font-size: 17px; line-height: 1.5; font-weight: 500; }
+.ticks { list-style: none; display: grid; gap: 10px; margin: 14px 0; }
+.ticks li { display: grid; grid-template-columns: 26px 1fr; gap: 10px; align-items: center; font-size: 17px; font-weight: 700; }
+.ticks li::before { content: "\2713"; width: 26px; height: 26px; border-radius: 99px; background: var(--night); color: var(--lime);
+                    font-size: 14px; font-weight: 800; display: grid; place-items: center; }
+.founding .close { font-weight: 700; }
+.letter { display: flex; flex-direction: column; gap: 8px; }
+.letter .rule { width: 28px; height: 4px; border-radius: 2px; background: var(--lime); margin-top: 6px; }
+.letter p { font-size: 17px; line-height: 1.5; font-weight: 500; }
+.letter .sig { font-weight: 700; }
+.letter .contact { font-size: 15px; color: var(--muted); font-weight: 600; }
+.letter .contact a { color: var(--ink); font-weight: 700; }
+footer { background: var(--night); color: #fff; margin-top: 8px; }
+footer .wrap { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; padding-top: 18px; padding-bottom: 18px; font-size: 15px; font-weight: 600; }
+footer img { height: 26px; }
+footer a { margin-left: auto; color: var(--lime); font-weight: 700; text-decoration: none; }
+@media (min-width: 820px) {
+  .hero { padding: 40px 0 44px; }
+  .hero .wrap { grid-template-columns: 1fr auto; grid-template-areas: "copy film" "lede film"; column-gap: 56px; row-gap: 20px; align-content: start; }
+  .copy { align-self: end; }
+  .lede { align-self: start; max-width: 520px; }
+  h1 { font-size: 52px; }
+  .film { width: min(400px, calc((100vh - 84px) * 9 / 16)); }
+  .screens { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .shot { display: block; }
+  .cap { margin-top: 2px; }
+  .letter { margin-top: 0; align-self: start; padding-top: 44px; }
+  .bottom { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; }
+  .ticks { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="copy">
+      <div class="brand" id="brand"><img src="assets/tmark_night.png" alt="">Tactivo</div>
+      <div class="lockup" id="lockup" hidden><span class="tile" id="crest"><img alt=""></span><span class="times" aria-hidden="true">×</span><span class="tile tm"><img src="assets/tmark_night.png" alt="Tactivo"></span></div>
+      <p class="prepared" id="prepared" hidden></p>
+      <p class="meta" id="meta" hidden></p>
+      <h1>Building Tactivo with <em>grassroots clubs</em></h1>
+    </div>
+    <div class="film">
+      <video id="film" src="video.mp4" poster="poster.jpg" controls playsinline preload="metadata"></video>
+      <div class="endcard" id="endcard" aria-hidden="true" hidden><span class="tile" id="endcrest"><img alt=""></span><div class="endname" id="endname"></div></div>
+    </div>
+    <p class="lede">Grassroots football runs on volunteers: people who finish a day's work and go straight to training, for the kids. Tactivo is a free app that makes that hour easier, and we want to build what comes next together with the clubs who use it.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section>
+    <div class="sec-h"><span class="bar"></span><h2>What it does today</h2><span class="note-s">Real screens from the app</span></div>
+    <div class="screens">
+      <div class="shot"><img src="assets/card_today_session.jpg" alt="A planned session in the app"><div class="cap">A session ready in minutes</div></div>
+      <div class="shot"><img src="assets/card_today_drill.jpg" alt="A 3D animated drill"><div class="cap">Drills you can see, with the coaching points</div></div>
+      <div class="shot"><img src="assets/card_today_share.jpg" alt="Sending a session to another coach"><div class="cap">Shared with the other coaches at your club</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-h"><span class="bar"></span><h2>What we're building with clubs</h2><span class="chip">CONCEPT · NOT IN THE APP YET</span></div>
+    <div class="screens">
+      <div class="shot"><img src="assets/card_next_notes.jpg" alt="Notes after training, concept"><div class="cap">An AI coaching assistant you talk to after training. It takes the notes.</div></div>
+      <div class="shot"><img src="assets/card_next_card.jpg" alt="A player's card, concept"><div class="cap">Coaching cards made automatically from those notes. No extra work for coaches.</div></div>
+      <div class="shot"><img src="assets/card_next_season.jpg" alt="A season view, concept"><div class="cap">How every player grows across the season.</div></div>
+    </div>
+  </section>
+
+  <section class="bottom">
+    <div class="founding">
+      <div class="sec-h"><span class="bar"></span><h2>Become a Tactivo Founding Club</h2></div>
+      <p class="tag">Built for coaches, by coaches.</p>
+      <p>It's simple. Introduce us to a few of <span id="coaches">your coaches</span>. They use Tactivo, and every few weeks they tell us:</p>
+      <ul class="ticks"><li>What's working</li><li>What isn't</li><li>What they'd add</li><li>What would make their week easier</li></ul>
+      <p class="close">We build from what they tell us, and your club sees it first.</p>
+    </div>
+    <div class="letter">
+      <p>Every feature from here on will be shaped by the clubs we work with. We'd love yours to be one of them.</p>
+      <span class="rule"></span>
+      <div class="sig">Billy, co-founder of Tactivo</div>
+      <div class="contact"><a href="mailto:billy@tactivo.co.uk">billy@tactivo.co.uk</a> · tactivo.co.uk</div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><img src="assets/tmark_night.png" alt="Tactivo">15 clubs are already Founding Clubs.<a href="https://tactivo.co.uk">tactivo.co.uk</a></div></footer>
+
+<script>
+// End card in the film: "TACTIVO FOUNDING CLUBS" chip lands ~50.6 s, the picture fades to black from ~53.0 s (of 53.7).
+const NAME_IN = 50.9, NAME_OUT = 53.0;
+const slug = (new URLSearchParams(location.search).get('club') || '').toLowerCase();
+const $ = id => document.getElementById(id);
+(/^[a-z0-9-]{3,120}$/.test(slug) ? fetch('c/' + slug + '.json').then(r => r.ok ? r.json() : null) : Promise.resolve(null)).then(club => {
+  if (!club || !club.name) return;                     // generic page
+  const name = club.name;
+  document.title = 'Tactivo Founding Clubs · ' + name;
+  // lockup and end card stay hidden unless their crest actually loads (no empty image box, also on error)
+  const crest = (id, onok) => { const img = $(id).firstChild; $(id).className = 'tile ' + club.tile; img.alt = name + ' crest';
+    img.onload = onok; img.onerror = () => img.removeAttribute('src'); if (club.crest) img.src = club.crest; };
+  crest('crest', () => { $('brand').hidden = true; $('lockup').hidden = false; });
+  crest('endcrest', () => { $('endcard').hidden = false; });
+  $('prepared').textContent = 'Prepared for ' + name; $('prepared').hidden = false;
+  const meta = [club.county, club.ages].filter(Boolean).join(' · ');
+  if (meta) { $('meta').textContent = meta; $('meta').hidden = false; }
+  $('coaches').textContent = /\)$/.test(name) ? 'the coaches at ' + name : name + (/s$/i.test(name) ? "'" : "'s") + ' coaches';
+  const v = $('film'), card = $('endcard');
+  $('endname').textContent = name;
+  const tick = () => card.classList.toggle('on', v.currentTime >= NAME_IN && v.currentTime < NAME_OUT);
+  v.addEventListener('timeupdate', tick); v.addEventListener('seeked', tick);
+}).catch(() => {});
+</script>
+</body>
+</html>
