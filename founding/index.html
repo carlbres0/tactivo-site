@@ -271,7 +271,7 @@ footer a { margin-left: auto; color: var(--lime); font-weight: 700; text-decorat
       <label>Phone<input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="25" required aria-describedby="e-phone"></label>
       <span class="err" id="e-phone" hidden>Please enter a UK phone number, like 07700 900123.</span>
       <div class="hp" aria-hidden="true"><label>Company<input id="f-hp" name="company" tabindex="-1" autocomplete="off"></label></div>
-      <button class="btn" type="submit" id="submit">Count us in</button>
+      <button class="btn" type="submit" id="submit">Submit</button>
       <p class="fail" id="fail" role="alert" hidden>That didn't go through. <a href="#" id="retry">Try again</a> or email <a href="mailto:billy@tactivo.co.uk">billy@tactivo.co.uk</a>.</p>
       <ul class="mini"><li>Nothing to buy or sign</li><li>15 minutes, at a time that suits you</li><li>Shape what we build next</li></ul>
       <div class="join" id="join" hidden><div class="joinrow"><span class="stack" id="stack"></span><span class="slot" id="slot"><span class="tag">Next?</span></span></div><p class="joincap" id="joincap"></p></div>
@@ -441,7 +441,7 @@ async function submit() {
   } catch (e) {
     $('fail').hidden = false;
   } finally {
-    $('submit').disabled = false; $('submit').textContent = 'Count us in';
+    $('submit').disabled = false; $('submit').textContent = 'Submit';
   }
 }
 form.addEventListener('submit', e => { e.preventDefault(); submit(); });
