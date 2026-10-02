@@ -83,7 +83,7 @@ section { margin-bottom: 34px; }
 /* social proof: data-driven from proof.json */
 .proof-row { display: flex; flex-wrap: wrap; gap: 14px 22px; }
 .proof-row figure { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; }
-.proof-row .tile { width: 52px; height: 52px; border-radius: 13px; background: #fff; padding: 6px; box-shadow: 0 0 0 1px rgba(17,22,26,.08); }
+.proof-row .tile { width: 64px; height: 64px; border-radius: 13px; background: #fff; padding: 6px; box-shadow: 0 0 0 1px rgba(17,22,26,.08); }
 /* sticky CTA: a bottom bar on phones, a floating card bottom-right on desktop */
 .cta { position: fixed; z-index: 20; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px;
        background: var(--night); color: #fff; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); box-shadow: 0 -6px 20px rgba(0,0,0,.25); }
@@ -272,9 +272,10 @@ fetch('proof.json').then(r => r.json()).then(list => {
   if (!clubs.length) return;
   for (const row of [$('proof-row'), $('sheet-proof')]) {
     for (const c of clubs) {
-      const fig = document.createElement('figure'), tile = document.createElement('span'), img = new Image(), cap = document.createElement('figcaption');
-      tile.className = 'tile'; img.src = c.crest; img.alt = ''; cap.textContent = c.name;
-      tile.append(img); fig.append(tile, cap); row.append(fig);
+      // Badges only (Carl, 2 Oct): the club name lives in alt/title, not on screen.
+      const fig = document.createElement('figure'), tile = document.createElement('span'), img = new Image();
+      tile.className = 'tile'; img.src = c.crest; img.alt = c.name + ' crest'; tile.title = c.name;
+      tile.append(img); fig.append(tile); row.append(fig);
     }
     row.hidden = false;
   }
