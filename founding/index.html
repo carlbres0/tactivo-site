@@ -39,6 +39,7 @@ body { background: var(--paper); color: var(--ink); font-family: Archivo, system
 .meta { font-size: 13px; font-weight: 600; color: #9AA3A9; margin-top: -10px; }
 h1 { font-size: 34px; line-height: 1.04; font-weight: 800; letter-spacing: -0.4px; }
 h1 em { font-style: normal; color: var(--lime); }
+.how { margin-top: 10px; font-size: 16px; line-height: 1.45; font-weight: 500; color: var(--body-dark); max-width: 520px; }
 .lede { grid-area: lede; font-size: 17px; line-height: 1.5; color: var(--body-dark); font-weight: 500; }
 /* film: the box is exactly the video's 9:16, so the end-card overlay lines up at any size */
 .film { grid-area: film; position: relative; width: 100%; max-width: 420px; aspect-ratio: 9 / 16; justify-self: center;
@@ -200,6 +201,7 @@ footer a { margin-left: auto; color: var(--lime); font-weight: 700; text-decorat
       <p class="prepared" id="prepared" hidden></p>
       <p class="meta" id="meta" hidden></p>
       <h1>Building Tactivo with <em>grassroots clubs</em></h1>
+      <p class="how">Introduce a few of your coaches. They use Tactivo, tell us what works, and get first go at what we build next.</p>
     </div>
     <div class="film">
       <video id="film" src="video.mp4" poster="poster.jpg" playsinline preload="metadata" aria-label="Tactivo Founding Clubs film, 54 seconds"></video>
@@ -211,7 +213,7 @@ footer a { margin-left: auto; color: var(--lime); font-weight: 700; text-decorat
       <div class="prog" id="prog" hidden><i id="progi"></i></div>
     </div>
     <p class="nobuy">Nothing to buy. Nothing to sign. Just your coaches' honest feedback.</p>
-    <p class="lede">Grassroots football runs on volunteers: people who finish a day's work and go straight to training, for the kids. Tactivo is an app that makes that hour easier, and we want to build what comes next together with the clubs who use it.</p>
+    <p class="lede">Grassroots football runs on volunteers: people who finish a day's work and go straight to training, for their players. Tactivo is an app that makes that hour easier, and we want to build what comes next together with the clubs who use it.</p>
   </div>
 </header>
 
