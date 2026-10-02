@@ -354,9 +354,13 @@ track('founding_view');
     $('soundbtn').setAttribute('aria-pressed', String(!v.muted));
     $('soundlbl').textContent = v.muted ? 'Sound off' : 'Sound on';
   };
-  const playFromTap = () => { if (!started) v.muted = false; userPaused = false; v.play().catch(() => {}); };
+  // Notion "Viewed page": once per load, only on a human signal (a tap, an unmute, or 25% watched). Variant B's muted
+  // autoplay alone doesn't count, so link scanners that run the page never mark a club as viewed.
+  let viewSent = false;
+  const sendView = () => { if (!viewSent) { viewSent = true; clubLoad.then(() => post({ slug: leadSlug, stage: 'view' }).catch(() => {})); } };
+  const playFromTap = () => { sendView(); if (!started) v.muted = false; userPaused = false; v.play().catch(() => {}); };
   const unmute = () => {
-    v.muted = false; track('video_sound_on');
+    v.muted = false; track('video_sound_on'); sendView();
     if (!unmutedOnce) { unmutedOnce = true; v.currentTime = 0; v.play().catch(() => {}); }   // B: first unmute restarts from 0
   };
   $('playbig').addEventListener('click', playFromTap);
@@ -372,7 +376,7 @@ track('founding_view');
   v.addEventListener('timeupdate', () => {
     if (!v.duration) return;
     const f = v.currentTime / v.duration; $('progi').style.transform = 'scaleX(' + f + ')';
-    for (const pct of [25, 50, 75]) if (f * 100 >= pct && !marks.has(pct)) { marks.add(pct); track('video_progress', { pct }); }
+    for (const pct of [25, 50, 75]) if (f * 100 >= pct && !marks.has(pct)) { marks.add(pct); track('video_progress', { pct }); if (pct === 25) sendView(); }
   });
   v.addEventListener('ended', () => { if (!marks.has(100)) { marks.add(100); track('video_progress', { pct: 100 }); } track('video_end'); $('progi').style.transform = 'scaleX(1)'; render(); });
   for (const e of ['pause', 'volumechange', 'seeked']) v.addEventListener(e, render);
