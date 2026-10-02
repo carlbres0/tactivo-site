@@ -43,7 +43,31 @@ h1 em { font-style: normal; color: var(--lime); }
 /* film: the box is exactly the video's 9:16, so the end-card overlay lines up at any size */
 .film { grid-area: film; position: relative; width: 100%; max-width: 420px; aspect-ratio: 9 / 16; justify-self: center;
         border-radius: 14px; overflow: hidden; background: #000; container-type: inline-size; }
-.film video { display: block; width: 100%; height: 100%; }
+.film video { display: block; width: 100%; height: 100%; cursor: pointer; }
+/* custom video UI (native controls hidden): A = tap to play with sound, B = muted autoplay + "Tap for sound" */
+.vbtn { appearance: none; border: 0; font: inherit; cursor: pointer; color: #fff; }
+.vbtn svg { display: block; flex-shrink: 0; }
+.vbtn:focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; }
+.playbig { position: absolute; inset: 0; margin: auto; height: max-content; display: flex; flex-direction: column; align-items: center; gap: 14px; background: none; }
+.playbig .disc { width: 96px; height: 96px; border-radius: 99px; background: var(--lime); color: var(--night); display: grid; place-items: center;
+                 box-shadow: 0 0 0 10px rgba(200,243,35,.22), 0 10px 30px rgba(0,0,0,.5); }
+.playbig .disc svg { width: 44px; height: 44px; margin-left: 6px; }
+.watch { background: rgba(11,15,16,.78); border: 1.5px solid rgba(255,255,255,.18); border-radius: 99px; padding: 9px 16px; font-size: 15px; font-weight: 700; white-space: nowrap; }
+.soundpill { position: absolute; top: 14px; left: 14px; display: flex; align-items: center; gap: 9px; background: var(--lime); color: var(--night);
+             border-radius: 99px; padding: 12px 18px 12px 14px; font-size: 17px; font-weight: 800; animation: pulse 1.6s ease-in-out infinite; }
+.soundpill svg { width: 24px; height: 24px; }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(200,243,35,.6); transform: scale(1); } 50% { box-shadow: 0 0 0 12px rgba(200,243,35,0); transform: scale(1.05); } }
+@media (prefers-reduced-motion: reduce) { .soundpill { animation: none; } }
+.soundbtn { position: absolute; right: 12px; top: 14px; min-height: 48px; display: flex; align-items: center; gap: 8px; padding: 0 16px 0 13px;
+            border-radius: 99px; background: rgba(11,15,16,.78); border: 1.5px solid rgba(255,255,255,.22); font-size: 15px; font-weight: 700; }
+.soundbtn svg { width: 24px; height: 24px; }
+.soundbtn[aria-pressed="true"] .off, .soundbtn[aria-pressed="false"] .on { display: none; }
+.soundbtn[aria-pressed="false"] { color: var(--lime); }
+.replay { position: absolute; inset: 0; margin: auto; width: max-content; height: max-content; display: flex; align-items: center; gap: 10px;
+          background: var(--lime); color: var(--night); border-radius: 99px; padding: 14px 22px 14px 18px; font-size: 18px; font-weight: 800; }
+.replay svg { width: 24px; height: 24px; }
+.prog { position: absolute; left: 0; right: 0; bottom: 0; height: 5px; background: rgba(255,255,255,.18); pointer-events: none; }
+.prog i { display: block; height: 100%; background: var(--lime); transform-origin: left; transform: scaleX(0); }
 .endcard { position: absolute; left: 7%; right: 7%; top: 75.6%; display: flex; flex-direction: column; align-items: center; gap: 1.8cqw;
            pointer-events: none; opacity: 0; transition: opacity .6s ease; }
 .endcard.on { opacity: 1; }
@@ -160,8 +184,13 @@ footer a { margin-left: auto; color: var(--lime); font-weight: 700; text-decorat
       <h1>Building Tactivo with <em>grassroots clubs</em></h1>
     </div>
     <div class="film">
-      <video id="film" src="video.mp4" poster="poster.jpg" controls playsinline preload="metadata"></video>
+      <video id="film" src="video.mp4" poster="poster.jpg" playsinline preload="metadata" aria-label="Tactivo Founding Clubs film, 54 seconds"></video>
       <div class="endcard" id="endcard" aria-hidden="true" hidden><span class="tile" id="endcrest"><img alt=""></span><div class="endname" id="endname"></div></div>
+      <button class="vbtn playbig" id="playbig" type="button" aria-label="Play the film with sound" hidden><span class="disc"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></span><span class="watch" id="watch">Watch · 54s · sound on</span></button>
+      <button class="vbtn soundpill" id="soundpill" type="button" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z" fill="currentColor"/><path d="m22 9-6 6M16 9l6 6"/></svg>Tap for sound</button>
+      <button class="vbtn replay" id="replay" type="button" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Watch again</button>
+      <button class="vbtn soundbtn" id="soundbtn" type="button" aria-pressed="true" hidden><svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.8 5.2a9.5 9.5 0 0 1 0 13.6"/></svg><svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z" fill="currentColor"/><path d="m22 9-6 6M16 9l6 6"/></svg><span id="soundlbl">Sound on</span></button>
+      <div class="prog" id="prog" hidden><i id="progi"></i></div>
     </div>
     <p class="nobuy">Nothing to buy. Nothing to sign. Just your coaches' honest feedback.</p>
     <p class="lede">Grassroots football runs on volunteers: people who finish a day's work and go straight to training, for the kids. Tactivo is an app that makes that hour easier, and we want to build what comes next together with the clubs who use it.</p>
@@ -243,7 +272,27 @@ const slug = (new URLSearchParams(location.search).get('club') || '').toLowerCas
 const $ = id => document.getElementById(id);
 // Lead endpoint (supabase/functions/founding-lead). text/plain keeps it a simple CORS request (no preflight), so keepalive works.
 const LEAD = 'https://rfykucyuwoyrgvkwkwiy.supabase.co/functions/v1/founding-lead';
-const post = body => fetch(LEAD, { method: 'POST', keepalive: true, headers: { 'content-type': 'text/plain' }, body: JSON.stringify(body) });
+const post = body => fetch(LEAD, { method: 'POST', keepalive: true, headers: { 'content-type': 'text/plain' }, body: JSON.stringify({ ...body, variant: VARIANT }) });
+// Video A/B: A = tap to play with sound, B = muted autoplay + "Tap for sound". Per club from the slug (stable across visits);
+// no club = random, kept for the tab session; ?v=a / ?v=b forces one for testing.
+const VARIANT = (() => {
+  const q = (new URLSearchParams(location.search).get('v') || '').toUpperCase();
+  if (q === 'A' || q === 'B') return q;
+  if (/^[a-z0-9-]{3,120}$/.test(slug)) { let h = 0; for (const ch of slug) h = (h * 31 + ch.charCodeAt(0)) >>> 0; return h % 2 ? 'B' : 'A'; }
+  let v; try { v = sessionStorage.getItem('fc_v'); } catch (e) {}
+  if (v !== 'A' && v !== 'B') { v = Math.random() < .5 ? 'A' : 'B'; try { sessionStorage.setItem('fc_v', v); } catch (e) {} }
+  return v;
+})();
+// PostHog (official snippet), cookieless: memory persistence, no autocapture / recording / surveys. If it never loads,
+// the stub just queues calls and the page is unaffected.
+try {
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_vJjjP6uyNrrexTBsLD5cJYmF53vtSP2LY5S42T75ouZj', {
+    api_host: 'https://eu.i.posthog.com', persistence: 'memory', autocapture: false, capture_pageview: false, capture_pageleave: false,
+    disable_session_recording: true, disable_surveys: true, advanced_disable_feature_flags: true, disable_external_dependency_loading: true,
+    disable_compression: true, capture_exceptions: false, capture_heatmaps: false, capture_dead_clicks: false, capture_performance: false,
+  });
+} catch (e) {}
 let leadSlug = 'generic';                              // becomes the club's slug once its file loads
 const clubLoad = (/^[a-z0-9-]{3,120}$/.test(slug) ? fetch('c/' + slug + '.json').then(r => r.ok ? r.json() : null) : Promise.resolve(null)).catch(() => null);
 clubLoad.then(club => {
@@ -266,6 +315,60 @@ clubLoad.then(club => {
   v.addEventListener('timeupdate', tick); v.addEventListener('seeked', tick);
 }).catch(() => {});
 
+// Tracking: only the events listed in the brief, each with {variant, slug, club, county}.
+const track = (event, extra) => clubLoad.then(c => { try { window.posthog && posthog.capture(event, {
+  variant: VARIANT, slug: leadSlug, club: (c && c.name) || null, county: (c && c.county) || null, ...extra }); } catch (e) {} });
+track('founding_view');
+
+// The film: no native controls. A shows a big play button (sound on); B autoplays muted when it scrolls into view.
+{
+  const v = $('film'), film = v.parentElement;
+  let started = false, autoFailed = false, unmutedOnce = VARIANT === 'A', userPaused = false;
+  const marks = new Set();
+  const render = () => {
+    const st = v.ended ? 'ended' : v.paused ? (started ? 'paused' : 'idle') : 'playing';
+    $('playbig').hidden = !(st === 'paused' || (st === 'idle' && (VARIANT === 'A' || autoFailed)));
+    $('watch').hidden = st !== 'idle';
+    $('soundpill').hidden = !(VARIANT === 'B' && !unmutedOnce && v.muted && st === 'playing');
+    $('soundbtn').hidden = !started || !$('soundpill').hidden;   // B shows the big pill until the first unmute
+    $('replay').hidden = st !== 'ended';
+    $('prog').hidden = !started;
+    $('soundbtn').setAttribute('aria-pressed', String(!v.muted));
+    $('soundlbl').textContent = v.muted ? 'Sound off' : 'Sound on';
+  };
+  const playFromTap = () => { if (!started) v.muted = false; userPaused = false; v.play().catch(() => {}); };
+  const unmute = () => {
+    v.muted = false; track('video_sound_on');
+    if (!unmutedOnce) { unmutedOnce = true; v.currentTime = 0; v.play().catch(() => {}); }   // B: first unmute restarts from 0
+  };
+  $('playbig').addEventListener('click', playFromTap);
+  $('soundpill').addEventListener('click', unmute);
+  $('soundbtn').addEventListener('click', () => { if (v.muted) unmute(); else { v.muted = true; track('video_sound_off'); } });
+  $('replay').addEventListener('click', () => { v.currentTime = 0; playFromTap(); });
+  v.addEventListener('click', () => {
+    if (v.ended) { v.currentTime = 0; playFromTap(); }
+    else if (v.paused) playFromTap();
+    else { userPaused = true; v.pause(); }
+  });
+  v.addEventListener('play', () => { if (v.currentTime < 0.5) track('video_play'); started = true; render(); });
+  v.addEventListener('timeupdate', () => {
+    if (!v.duration) return;
+    const f = v.currentTime / v.duration; $('progi').style.transform = 'scaleX(' + f + ')';
+    for (const pct of [25, 50, 75]) if (f * 100 >= pct && !marks.has(pct)) { marks.add(pct); track('video_progress', { pct }); }
+  });
+  v.addEventListener('ended', () => { if (!marks.has(100)) { marks.add(100); track('video_progress', { pct: 100 }); } track('video_end'); $('progi').style.transform = 'scaleX(1)'; render(); });
+  for (const e of ['pause', 'volumechange', 'seeked']) v.addEventListener(e, render);
+  if (VARIANT === 'B' && 'IntersectionObserver' in window) {
+    v.muted = true; v.setAttribute('muted', '');
+    new IntersectionObserver((entries, io) => {
+      if (!entries.some(e => e.isIntersecting) || started || userPaused) return;
+      io.disconnect();
+      v.play().catch(() => { autoFailed = true; v.muted = false; unmutedOnce = true; render(); });   // e.g. low-power mode: fall back to A's button
+    }, { threshold: 0.5 }).observe(film);
+  } else if (VARIANT === 'B') { autoFailed = true; unmutedOnce = true; }
+  render();
+}
+
 // Social proof: proof.json [{name, crest}]; entries without a crest render nothing, the section hides if none have one.
 fetch('proof.json').then(r => r.json()).then(list => {
   const clubs = list.filter(c => c && c.crest && c.name);
@@ -286,6 +389,7 @@ fetch('proof.json').then(r => r.json()).then(list => {
 const sheet = $('sheet'), form = $('form');
 let interestSent = false;
 $('open').addEventListener('click', () => {
+  track('register_click');
   if (!interestSent) { interestSent = true; clubLoad.then(() => post({ slug: leadSlug, stage: 'interest' }).catch(() => {})); }
   sheet.showModal(); if (!$('ask').hidden) $('sheet-h').focus();   // land on the headline, not the close button
 });
@@ -305,6 +409,7 @@ async function submit() {
     await clubLoad;
     const r = await post({ slug: leadSlug, stage: 'details', name, phone, hp: $('f-hp').value });
     if (!r.ok) throw new Error(r.status);
+    track('details_submit');
     $('done-msg').textContent = 'Thanks, ' + name.split(/\s+/)[0] + '. Billy will be in touch soon.';
     form.hidden = true; $('ask').hidden = true; $('done').hidden = false; $('done').focus();
   } catch (e) {
