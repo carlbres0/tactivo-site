@@ -105,7 +105,7 @@ section { margin-bottom: 34px; }
 /* "nothing being sold", right under the film */
 .nobuy { grid-area: nobuy; justify-self: center; text-align: center; font-size: 15px; font-weight: 700; color: var(--lime); line-height: 1.35; max-width: 420px; }
 /* social proof: data-driven from proof.json */
-.proof-row { display: flex; flex-wrap: wrap; gap: 14px 22px; }
+.proof-row { display: flex; flex-wrap: wrap; gap: 12px clamp(8px, 2vw, 22px); }   /* 4 badges + "more" fit one row at 390px */
 .proof-row figure { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; }
 .proof-row .tile { width: 64px; height: 64px; border-radius: 13px; background: #fff; padding: 6px; box-shadow: 0 0 0 1px rgba(17,22,26,.08); }
 /* sticky CTA: a bottom bar on phones, a floating card bottom-right on desktop */
@@ -134,10 +134,28 @@ body { padding-bottom: 72px; }
 .mini { list-style: none; display: grid; gap: 6px; }
 .mini li { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #2E353B; }
 .mini li::before { content: "\2713"; width: 18px; height: 18px; flex-shrink: 0; border-radius: 99px; background: var(--night); color: var(--lime); font-size: 11px; font-weight: 800; display: grid; place-items: center; }
-.sheet .proof-row { gap: 8px 14px; }
-.sheet .proof-row figure { font-size: 13px; gap: 7px; }
-.sheet .proof-row .tile { width: 32px; height: 32px; border-radius: 8px; padding: 3px; }
-.sheet .pl { width: 100%; font-size: 12px; font-weight: 700; letter-spacing: .3px; color: var(--muted); }
+.proof-row .more { background: var(--night); box-shadow: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
+                   color: var(--lime); font-weight: 800; line-height: 1; }
+.proof-row .more b { font-size: 26px; }
+.proof-row .more small { font-size: 12px; letter-spacing: .3px; }
+/* sheet: "your club joins them" — proof badges stacked, then this club's crest (or a dashed slot) */
+.join { background: var(--night); color: #fff; border-radius: 16px; padding: 16px 16px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.joinrow { display: flex; align-items: center; gap: 14px; }
+.stack { display: flex; }
+.stack .tile { width: 38px; height: 38px; border-radius: 99px; background: #fff; padding: 4px; margin-left: -7px; box-shadow: 0 0 0 2.5px var(--night); }
+.stack .tile:first-child { margin-left: 0; }
+.stack .tile img { border-radius: 99px; }   /* square crest images (Long Lane) must not poke out of the circle */
+.slot { position: relative; width: 50px; height: 50px; flex-shrink: 0; border-radius: 13px; display: grid; place-items: center; }
+.slot.crest { padding: 4px; box-shadow: 0 0 0 3px var(--lime); }
+.slot.crest.light, .slot.crest.none { background: #fff; }
+.slot.crest.dark { background: #1E2428; }
+.slot img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+.slot.open { border-radius: 99px; border: 2.5px dashed var(--lime); color: var(--lime); font-size: 28px; font-weight: 700; line-height: 1; }
+.slot.open::before { content: "+"; margin-top: -3px; }
+.slot .tag { position: absolute; top: -13px; right: -22px; background: var(--lime); color: var(--night); border-radius: 99px; padding: 3px 7px 2px;
+             font-size: 11px; font-weight: 800; letter-spacing: .2px; box-shadow: 0 0 0 2px var(--night); }
+.slot.open .tag { display: none; }
+.joincap { font-size: 15px; font-weight: 700; text-align: center; }
 #sheet-h:focus, #done:focus { outline: none; }
 .privacy { font-size: 12px; color: var(--muted); font-weight: 500; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
@@ -208,7 +226,7 @@ footer a { margin-left: auto; color: var(--lime); font-weight: 700; text-decorat
   </section>
 
   <section id="proof" hidden>
-    <div class="sec-h"><span class="bar"></span><h2>Coaches at these clubs already use Tactivo</h2></div>
+    <div class="sec-h"><span class="bar"></span><h2>Just a few of the clubs whose coaches use Tactivo</h2></div>
     <div class="proof-row" id="proof-row"></div>
   </section>
 
@@ -253,10 +271,10 @@ footer a { margin-left: auto; color: var(--lime); font-weight: 700; text-decorat
       <label>Phone<input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="25" required aria-describedby="e-phone"></label>
       <span class="err" id="e-phone" hidden>Please enter a UK phone number, like 07700 900123.</span>
       <div class="hp" aria-hidden="true"><label>Company<input id="f-hp" name="company" tabindex="-1" autocomplete="off"></label></div>
-      <button class="btn" type="submit" id="submit">Book my chat</button>
+      <button class="btn" type="submit" id="submit">Count us in</button>
       <p class="fail" id="fail" role="alert" hidden>That didn't go through. <a href="#" id="retry">Try again</a> or email <a href="mailto:billy@tactivo.co.uk">billy@tactivo.co.uk</a>.</p>
       <ul class="mini"><li>Nothing to buy or sign</li><li>15 minutes, at a time that suits you</li><li>Shape what we build next</li></ul>
-      <div class="proof-row" id="sheet-proof" hidden><span class="pl">Already using Tactivo</span></div>
+      <div class="join" id="join" hidden><div class="joinrow"><span class="stack" id="stack"></span><span class="slot" id="slot"><span class="tag">Next?</span></span></div><p class="joincap" id="joincap"></p></div>
       <p class="privacy">We'll only use this to contact you about Tactivo.</p>
     </form>
     <div class="done" id="done" role="status" tabindex="-1" hidden><div class="big" aria-hidden="true">&#10003;</div><p id="done-msg"></p></div>
@@ -305,7 +323,7 @@ clubLoad.then(club => {
     img.onload = onok; img.onerror = () => img.removeAttribute('src'); if (club.crest) img.src = club.crest; };
   crest('crest', () => { $('brand').hidden = true; $('lockup').hidden = false; });
   crest('endcrest', () => { $('endcard').hidden = false; });
-  $('prepared').textContent = 'Prepared for ' + name; $('prepared').hidden = false;
+  $('prepared').textContent = name + ' × Tactivo'; $('prepared').hidden = false;
   const meta = [club.county, club.ages].filter(Boolean).join(' · ');
   if (meta) { $('meta').textContent = meta; $('meta').hidden = false; }
   $('coaches').textContent = /\)$/.test(name) ? 'the coaches at ' + name : name + (/s$/i.test(name) ? "'" : "'s") + ' coaches';
@@ -373,17 +391,25 @@ track('founding_view');
 fetch('proof.json').then(r => r.json()).then(list => {
   const clubs = list.filter(c => c && c.crest && c.name);
   if (!clubs.length) return;
-  for (const row of [$('proof-row'), $('sheet-proof')]) {
-    for (const c of clubs) {
-      // Badges only (Carl, 2 Oct): the club name lives in alt/title, not on screen.
-      const fig = document.createElement('figure'), tile = document.createElement('span'), img = new Image();
-      tile.className = 'tile'; img.src = c.crest; img.alt = c.name + ' crest'; tile.title = c.name;
-      tile.append(img); fig.append(tile); row.append(fig);
-    }
-    row.hidden = false;
-  }
+  const badge = c => { const tile = document.createElement('span'), img = new Image();
+    tile.className = 'tile'; img.src = c.crest; img.alt = c.name + ' crest'; tile.title = c.name; tile.append(img); return tile; };
+  // Badges only (Carl, 2 Oct): the club name lives in alt/title, not on screen. A "+ more" tile makes it read as a sample.
+  for (const c of clubs) { const fig = document.createElement('figure'); fig.append(badge(c)); $('proof-row').append(fig); }
+  const more = document.createElement('figure'); more.innerHTML = '<span class="tile more" aria-label="and more clubs"><b>+</b><small>more</small></span>'; $('proof-row').append(more);
+  for (const c of clubs) $('stack').append(badge(c));
   $('proof').hidden = false;
 }).catch(() => {});
+
+// Sheet: "your club joins them" — this club's crest in the last slot with a lime ring, or a dashed open slot (generic / crest fails).
+clubLoad.then(club => {
+  const slot = $('slot'), open = () => { slot.className = 'slot open'; slot.querySelector('img')?.remove(); };
+  $('joincap').textContent = (club && club.name ? club.name : 'Your club') + ' could be next.';
+  if (club && club.name && club.crest) {
+    const img = new Image(); img.alt = club.name + ' crest'; img.onerror = open; img.src = club.crest;
+    slot.className = 'slot crest ' + (club.tile || 'light'); slot.prepend(img);
+  } else open();
+  $('join').hidden = false;
+});
 
 // Register interest: the tap alone notifies us; the sheet then asks for a name and number.
 const sheet = $('sheet'), form = $('form');
@@ -415,7 +441,7 @@ async function submit() {
   } catch (e) {
     $('fail').hidden = false;
   } finally {
-    $('submit').disabled = false; $('submit').textContent = 'Book my chat';
+    $('submit').disabled = false; $('submit').textContent = 'Count us in';
   }
 }
 form.addEventListener('submit', e => { e.preventDefault(); submit(); });
