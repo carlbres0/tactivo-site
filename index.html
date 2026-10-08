@@ -17,7 +17,7 @@
 
   STORY: A grassroots coach sees the four corners they are meant to cover,
   admits they cannot cover them from memory, watches Tactivo build the session
-  and name the corner they have been ignoring, and emails for early access.
+  and name the corner they have been ignoring, and gets the app.
 
   FIRST VIEWPORT: Full-bleed ink. Left: a Wednesday-night standfirst, the
   headline, the primary action. Right: the real drill screen bleeding off the
@@ -40,7 +40,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tactivo — the home for football coaches</title>
-<meta name="description" content="Tactivo's AI planner builds your football session in seconds, sized to the age group, the players who turned up and the time you have, from over 1,000 drill variations. Free to use. Coming soon on iOS and Android.">
+<meta name="description" content="Tactivo's AI planner builds your football session in seconds, sized to the age group, the players who turned up and the time you have, from over 1,000 drill variations. Free to use on iOS and Android.">
 <link rel="canonical" href="https://tactivo.co.uk/">
 <meta name="theme-color" content="#0b0f10">
 <link rel="icon" href="favicon.png" type="image/png">
@@ -88,7 +88,7 @@
     <nav aria-label="Primary">
       <a class="mn" href="#corners">The four corners</a>
       <a class="mn" href="#library">The library</a>
-      <a class="btn btn--sm" href="#access">Get early access</a>
+      <a class="btn btn--sm" href="#get" data-get="nav">Get Tactivo — free</a>
     </nav>
   </div>
 </header>
@@ -103,7 +103,7 @@
       <h1>Your next session, planned by <em>AI</em> in seconds.</h1>
       <p class="lede">Tell Tactivo what you're working on and who's coming, and it builds the whole session for you. It tracks what you've covered all season, so you always know what's next.</p>
       <div class="actions">
-        <a class="btn" href="#access">Get early access</a>
+        <a class="btn" href="#get" data-get="hero">Get Tactivo — free</a>
         <a class="btn btn--line" href="#corners">See how it plans</a>
       </div>
       <ul class="perks">
@@ -114,7 +114,7 @@
         <li>1,000+ drill variations</li>
         <li>Free to use</li>
       </ul>
-      <p class="fineprint">Free while we're in early access. No card. One email when it opens.</p>
+      <p class="fineprint">Free to download. No card.</p>
     </div>
 
     <figure class="hero-shot">
@@ -380,14 +380,18 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════ early access -->
-<section class="access" id="access" aria-labelledby="acc-h">
+<!-- ═══════════════════════════════════════════════ get the app -->
+<section class="access" id="get" aria-labelledby="acc-h">
+  <span id="access"></span>
   <div class="wrap">
-    <p class="kicker" style="--c: var(--technical); justify-content: center">Coming soon</p>
-    <h2 id="acc-h">Tactivo lands on iOS and Android</h2>
-    <p>We are finishing the first public release. Send us an email and we will tell you the day it opens. One message, nothing else, ever.</p>
-    <a class="btn" href="mailto:info@tactivo.co.uk?subject=Tactivo%20early%20access">Email us for early access</a>
-    <p class="fineprint">Or write to <a href="mailto:info@tactivo.co.uk">info@tactivo.co.uk</a>.</p>
+    <p class="kicker" style="--c: var(--technical); justify-content: center">Free to download</p>
+    <h2 id="acc-h">Get Tactivo on your phone</h2>
+    <p>Plan Wednesday's session in seconds, then run it from the pitch. Free on iOS and Android.</p>
+    <div class="actions" style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center">
+      <a class="btn" href="https://apps.apple.com/gb/app/tactivo-football-coaching/id6807951543" data-store="app_store" data-placement="get">App Store</a>
+      <a class="btn" href="https://play.google.com/store/apps/details?id=com.tactivo.tactivo&amp;referrer=utm_source%3Dsite%26utm_campaign%3Dget" data-store="google_play" data-placement="get">Google Play</a>
+    </div>
+    <p class="fineprint">Or <a href="https://app.tactivo.co.uk" data-store="web" data-placement="get">use it in your browser</a>. Free to download. No card.</p>
   </div>
 </section>
 
@@ -405,7 +409,7 @@
         <ul>
           <li><a href="#corners">The four corners</a></li>
           <li><a href="#library">The library</a></li>
-          <li><a href="#access">Early access</a></li>
+          <li><a href="#get" data-get="footer">Get the app</a></li>
           <li><a href="company.html">Company</a></li>
         </ul>
       </div>
@@ -441,6 +445,44 @@
     });
   }
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // PostHog (official snippet), cookieless: memory persistence, no autocapture / recording / surveys. If it never loads,
+  // the stub just queues calls and the page is unaffected.
+  try {
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_vJjjP6uyNrrexTBsLD5cJYmF53vtSP2LY5S42T75ouZj', {
+      api_host: 'https://eu.i.posthog.com', persistence: 'memory', autocapture: false, capture_pageview: false, capture_pageleave: false,
+      disable_session_recording: true, disable_surveys: true, advanced_disable_feature_flags: true, disable_external_dependency_loading: true,
+      disable_compression: true, capture_exceptions: false, capture_heatmaps: false, capture_dead_clicks: false, capture_performance: false,
+    });
+  } catch (e) {}
+
+  // Pageview with the campaign tags, and one store_click per store link. The primary button goes to the store for the
+  // visitor's phone; on a desktop it just scrolls to the store buttons.
+  var AS = "https://apps.apple.com/gb/app/tactivo-football-coaching/id6807951543";
+  var GP = "https://play.google.com/store/apps/details?id=com.tactivo.tactivo";
+  var q = new URLSearchParams(location.search), utm = {};
+  ['utm_source', 'utm_medium', 'utm_campaign'].forEach(function (k) { if (q.get(k)) utm[k] = q.get(k); });
+  try { posthog.capture('$pageview', utm); } catch (e) {}
+
+  function track(store, placement, href, ev) {
+    try { posthog.capture('store_click', { store: store, placement: placement }, { transport: 'sendBeacon' }); } catch (e) {}
+    if (ev.defaultPrevented || ev.button || ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+    ev.preventDefault();                                 // 150 ms so the event leaves before the page does
+    setTimeout(function () { location.href = href; }, 150);
+  }
+  document.querySelectorAll('[data-store]').forEach(function (a) {
+    a.addEventListener('click', function (ev) { track(a.dataset.store, a.dataset.placement, a.href, ev); });
+  });
+  document.querySelectorAll('[data-get]').forEach(function (a) {
+    a.addEventListener('click', function (ev) {
+      var ua = navigator.userAgent, ios = /iPhone|iPad|iPod/.test(ua), android = /Android/.test(ua);
+      if (!ios && !android) return;                      // desktop: the #get anchor scrolls
+      var pl = a.dataset.get;
+      track(ios ? 'app_store' : 'google_play', pl,
+        ios ? AS : GP + '&referrer=utm_source%3Dsite%26utm_campaign%3D' + pl, ev);
+    });
+  });
 
   // One authored moment: the corner bars fill to their real values as each
   // measured block arrives. Everything else is already visible by default.
