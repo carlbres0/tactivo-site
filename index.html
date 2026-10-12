@@ -102,9 +102,9 @@
       <p class="standfirst">Wednesday, 6:15pm. <b>Nine turned up, not fourteen.</b> You have the pitch for an hour.</p>
       <h1>Your next session, planned by <em>AI</em> in seconds.</h1>
       <p class="lede">Tell Tactivo what you're working on and who's coming, and it builds the whole session for you. It tracks what you've covered all season, so you always know what's next.</p>
-      <div class="actions">
-        <a class="btn" data-store="apple" data-place="hero" href="https://apps.apple.com/gb/app/id6807951543">Download on the App Store</a>
-        <a class="btn" data-store="google" data-place="hero" href="https://play.google.com/store/apps/details?id=com.tactivo.tactivo&amp;referrer=utm_source%3Dtactivo.co.uk%26utm_medium%3Dwebsite%26utm_campaign%3Dhero">Get it on Google Play</a>
+      <div class="actions stores" id="hero-stores">
+        <a class="badge" data-store="apple" data-place="hero" href="https://apps.apple.com/gb/app/id6807951543"><img src="img/badge-app-store.svg" alt="Download on the App Store" width="120" height="40"></a>
+        <a class="badge badge--gp" data-store="google" data-place="hero" href="https://play.google.com/store/apps/details?id=com.tactivo.tactivo&amp;referrer=utm_source%3Dtactivo.co.uk%26utm_medium%3Dwebsite%26utm_campaign%3Dhero"><img src="img/badge-google-play.png" alt="Get it on Google Play" width="155" height="60"></a>
       </div>
       <ul class="perks">
         <li>Generate sessions</li>
@@ -386,15 +386,22 @@
     <p class="kicker" style="--c: var(--technical); justify-content: center">Out now</p>
     <h2 id="acc-h">Get Tactivo on iPhone and Android</h2>
     <p>Free to download. Tell it who turned up and have tonight's session planned before you leave the car park.</p>
-    <div class="actions">
-      <a class="btn" data-store="apple" data-place="footer_cta" href="https://apps.apple.com/gb/app/id6807951543">Download on the App Store</a>
-      <a class="btn" data-store="google" data-place="footer_cta" href="https://play.google.com/store/apps/details?id=com.tactivo.tactivo&amp;referrer=utm_source%3Dtactivo.co.uk%26utm_medium%3Dwebsite%26utm_campaign%3Dfooter_cta">Get it on Google Play</a>
+    <div class="actions stores">
+      <a class="badge" data-store="apple" data-place="footer_cta" href="https://apps.apple.com/gb/app/id6807951543"><img src="img/badge-app-store.svg" alt="Download on the App Store" width="120" height="40"></a>
+      <a class="badge badge--gp" data-store="google" data-place="footer_cta" href="https://play.google.com/store/apps/details?id=com.tactivo.tactivo&amp;referrer=utm_source%3Dtactivo.co.uk%26utm_medium%3Dwebsite%26utm_campaign%3Dfooter_cta"><img src="img/badge-google-play.png" alt="Get it on Google Play" width="155" height="60"></a>
     </div>
     <p class="fineprint">Questions? Write to <a href="mailto:info@tactivo.co.uk">info@tactivo.co.uk</a>.</p>
   </div>
 </section>
 
 </main>
+
+<!-- Sticky store bar: shown once the hero's badges have scrolled away, hidden
+     again over the closing download section so the badges never double up. -->
+<div class="storebar" id="storebar" aria-label="Download Tactivo">
+  <a class="badge" data-store="apple" data-place="sticky" href="https://apps.apple.com/gb/app/id6807951543"><img src="img/badge-app-store.svg" alt="Download on the App Store" width="120" height="40"></a>
+  <a class="badge badge--gp" data-store="google" data-place="sticky" href="https://play.google.com/store/apps/details?id=com.tactivo.tactivo&amp;referrer=utm_source%3Dtactivo.co.uk%26utm_medium%3Dwebsite%26utm_campaign%3Dsticky"><img src="img/badge-google-play.png" alt="Get it on Google Play" width="155" height="60"></a>
+</div>
 
 <footer class="site">
   <div class="wrap">
@@ -456,6 +463,20 @@
   }, { rootMargin: '0px 0px -12% 0px' });
 
   document.querySelectorAll('.up, .rail, .payoff').forEach(function (el) { io.observe(el); });
+
+  // The store bar only appears while neither the hero's badges nor the
+  // closing download section are on screen.
+  (function () {
+    var bar = document.getElementById('storebar'), seen = new Map();
+    if (!bar || !('IntersectionObserver' in window)) return;
+    var vis = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { seen.set(e.target, e.isIntersecting); });
+      var any = false; seen.forEach(function (v) { any = any || v; });
+      bar.classList.toggle('on', !any);
+    });
+    vis.observe(document.getElementById('hero-stores'));
+    vis.observe(document.getElementById('access'));
+  })();
 </script>
 
 <script src="ph.js" defer></script>

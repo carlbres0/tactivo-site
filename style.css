@@ -902,3 +902,25 @@ footer.site .imprint {
   .counts { gap: 26px; }
   .counts div b { font-size: 32px; }
 }
+
+/* ============================================================ store badges */
+
+.actions.stores { align-items: center; }
+.badge { display: inline-flex; line-height: 0; border-radius: 8px; }
+.badge img { height: 40px; width: auto; }
+/* Google's badge ships with its own clear space; trim it so both read the same size. */
+.badge--gp img { height: 60px; margin: -10px -10px; }
+.badge:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+
+.storebar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+  display: flex; justify-content: center; align-items: center; gap: 16px;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  background: rgba(11, 15, 16, 0.92);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border-top: 1px solid var(--hair);
+  transform: translateY(110%); transition: transform 0.25s ease;
+}
+.storebar.on { transform: none; }
+body { padding-bottom: 72px; }
+@media (prefers-reduced-motion: reduce) { .storebar { transition: none; } }
