@@ -1,0 +1,493 @@
+{
+  "rootMotion": "in-place: root XY stripped at retarget; measured travel kept as clips[].speed (source FBX per clip: CLIPS table, prototype/blender/build_ochi_registry.py)",
+  "clips": {
+    "idle_a": {
+      "duration": 10.5,
+      "loop": true,
+      "category": "idle"
+    },
+    "idle_b": {
+      "duration": 4.633,
+      "loop": true,
+      "category": "idle"
+    },
+    "jog_a": {
+      "duration": 0.833,
+      "loop": true,
+      "category": "locomotion",
+      "speed": 2.3
+    },
+    "pass_a": {
+      "duration": 0.567,
+      "loop": false,
+      "category": "pass",
+      "ballContact": 0.167
+    },
+    "pass_b": {
+      "duration": 0.5,
+      "loop": false,
+      "category": "pass",
+      "ballContact": 0.167
+    },
+    "shoot_a": {
+      "duration": 1.5,
+      "loop": false,
+      "category": "shoot",
+      "ballContact": 0.767
+    },
+    "receive_a": {
+      "duration": 2.5,
+      "loop": false,
+      "category": "receive",
+      "ballContact": 1.367
+    },
+    "jog_back_a": {
+      "duration": 0.8,
+      "loop": true,
+      "category": "locomotion",
+      "speed": 2.11
+    },
+    "jog_back_diag_a": {
+      "duration": 0.733,
+      "loop": true,
+      "category": "locomotion",
+      "speed": 2.04
+    },
+    "jog_back_diag_b": {
+      "duration": 0.833,
+      "loop": true,
+      "category": "locomotion",
+      "speed": 2.27
+    },
+    "jog_fwd_diag_a": {
+      "duration": 0.8,
+      "loop": true,
+      "category": "locomotion",
+      "speed": 2.57
+    },
+    "jog_fwd_diag_b": {
+      "duration": 0.833,
+      "loop": true,
+      "category": "locomotion",
+      "speed": 2.42
+    },
+    "strafe_l_a": {
+      "duration": 0.7,
+      "loop": true,
+      "category": "locomotion",
+      "speed": 2.67
+    },
+    "strafe_r_a": {
+      "duration": 0.733,
+      "loop": true,
+      "category": "locomotion",
+      "speed": 2.13
+    },
+    "strike_jog_a": {
+      "duration": 1.267,
+      "loop": true,
+      "category": "locomotion",
+      "speed": 2.14
+    },
+    "tackle_a": {
+      "duration": 2.733,
+      "loop": false,
+      "category": "defensive"
+    },
+    "tackle_b": {
+      "duration": 1.767,
+      "loop": false,
+      "category": "defensive"
+    },
+    "tackle_c": {
+      "duration": 2.3,
+      "loop": false,
+      "category": "defensive"
+    },
+    "trip_a": {
+      "duration": 1.533,
+      "loop": false,
+      "category": "defensive"
+    },
+    "gk_idle_a": {
+      "duration": 3.333,
+      "loop": true,
+      "category": "goalkeeper"
+    },
+    "gk_block_a": {
+      "duration": 2.633,
+      "loop": false,
+      "category": "goalkeeper"
+    },
+    "gk_block_b": {
+      "duration": 2.467,
+      "loop": false,
+      "category": "goalkeeper"
+    },
+    "gk_block_c": {
+      "duration": 3.4,
+      "loop": false,
+      "category": "goalkeeper"
+    },
+    "gk_catch_a": {
+      "duration": 2.033,
+      "loop": false,
+      "category": "goalkeeper"
+    },
+    "gk_catch_b": {
+      "duration": 0.967,
+      "loop": false,
+      "category": "goalkeeper"
+    },
+    "gk_catch_c": {
+      "duration": 2.667,
+      "loop": false,
+      "category": "goalkeeper"
+    },
+    "gk_catch_d": {
+      "duration": 2.733,
+      "loop": false,
+      "category": "goalkeeper"
+    },
+    "gk_direct_a": {
+      "duration": 7.167,
+      "loop": false,
+      "category": "goalkeeper"
+    },
+    "gk_direct_b": {
+      "duration": 7.7,
+      "loop": false,
+      "category": "goalkeeper"
+    },
+    "gk_dive_a": {
+      "duration": 3.167,
+      "loop": false,
+      "category": "goalkeeper"
+    },
+    "gk_dive_b": {
+      "duration": 3.2,
+      "loop": false,
+      "category": "goalkeeper"
+    },
+    "gk_dropkick_a": {
+      "duration": 3.9,
+      "loop": false,
+      "category": "goalkeeper"
+    },
+    "gk_miss_a": {
+      "duration": 2.833,
+      "loop": false,
+      "category": "goalkeeper"
+    },
+    "gk_throw_a": {
+      "duration": 2.833,
+      "loop": false,
+      "category": "goalkeeper"
+    },
+    "gk_pass_a": {
+      "duration": 3.133,
+      "loop": false,
+      "category": "goalkeeper"
+    },
+    "gk_place_a": {
+      "duration": 3.5,
+      "loop": false,
+      "category": "goalkeeper"
+    },
+    "gk_place_b": {
+      "duration": 7.967,
+      "loop": false,
+      "category": "goalkeeper"
+    },
+    "gk_scoop_a": {
+      "duration": 2.5,
+      "loop": false,
+      "category": "goalkeeper"
+    },
+    "gk_sidestep_a": {
+      "duration": 0.533,
+      "loop": false,
+      "category": "goalkeeper"
+    },
+    "gk_sidestep_b": {
+      "duration": 0.5,
+      "loop": false,
+      "category": "goalkeeper"
+    },
+    "header_a": {
+      "duration": 1.9,
+      "loop": false,
+      "category": "misc",
+      "ballContact": null
+    },
+    "header_b": {
+      "duration": 4.2,
+      "loop": false,
+      "category": "misc",
+      "ballContact": null
+    },
+    "knee_a": {
+      "duration": 0.9,
+      "loop": false,
+      "category": "misc",
+      "ballContact": null
+    },
+    "knee_b": {
+      "duration": 0.6,
+      "loop": false,
+      "category": "misc",
+      "ballContact": null
+    },
+    "kick_up_a": {
+      "duration": 1.333,
+      "loop": false,
+      "category": "misc"
+    },
+    "stall_a": {
+      "duration": 3.267,
+      "loop": false,
+      "category": "misc"
+    },
+    "stall_b": {
+      "duration": 2.133,
+      "loop": false,
+      "category": "misc"
+    },
+    "stall_c": {
+      "duration": 2.3,
+      "loop": false,
+      "category": "misc"
+    },
+    "stall_d": {
+      "duration": 1.833,
+      "loop": false,
+      "category": "misc"
+    },
+    "scissor_a": {
+      "duration": 2.767,
+      "loop": false,
+      "category": "misc"
+    },
+    "throw_in_a": {
+      "duration": 2.767,
+      "loop": false,
+      "category": "misc"
+    },
+    "fallen_idle_a": {
+      "duration": 1.3,
+      "loop": true,
+      "category": "misc"
+    },
+    "standing_up_a": {
+      "duration": 1.667,
+      "loop": false,
+      "category": "misc"
+    },
+    "transition_a": {
+      "duration": 0.767,
+      "loop": false,
+      "category": "misc"
+    },
+    "idle_relaxed_a": {
+      "duration": 16.633,
+      "loop": true,
+      "category": "idle"
+    },
+    "idle_relaxed_b": {
+      "duration": 2.5,
+      "loop": true,
+      "category": "idle"
+    },
+    "idle_relaxed_c": {
+      "duration": 8.767,
+      "loop": true,
+      "category": "idle"
+    },
+    "idle_relaxed_d": {
+      "duration": 6,
+      "loop": true,
+      "category": "idle"
+    },
+    "idle_transition": {
+      "duration": 1.867,
+      "loop": false,
+      "category": "idle"
+    },
+    "idle_sweat": {
+      "duration": 2.633,
+      "loop": false,
+      "category": "idle"
+    },
+    "walk_a": {
+      "duration": 1.033,
+      "loop": true,
+      "category": "locomotion",
+      "speed": 1.48
+    },
+    "run_a": {
+      "duration": 0.733,
+      "loop": true,
+      "category": "locomotion",
+      "speed": 3.92
+    },
+    "sprint_a": {
+      "duration": 0.533,
+      "loop": true,
+      "category": "locomotion",
+      "speed": 5.48
+    },
+    "run_b": {
+      "duration": 0.9,
+      "loop": true,
+      "category": "locomotion",
+      "speed": 3.21
+    },
+    "sprint_b": {
+      "duration": 0.533,
+      "loop": true,
+      "category": "locomotion",
+      "speed": 5.02
+    },
+    "run_slow_a": {
+      "duration": 0.733,
+      "loop": true,
+      "category": "locomotion",
+      "speed": 2.78
+    },
+    "jog_slow_a": {
+      "duration": 2.567,
+      "loop": true,
+      "category": "locomotion",
+      "speed": 1.76
+    },
+    "run_back_a": {
+      "duration": 0.633,
+      "loop": true,
+      "category": "locomotion",
+      "speed": 2.81
+    },
+    "run_look_a": {
+      "duration": 0.767,
+      "loop": true,
+      "category": "locomotion",
+      "speed": 2.81
+    },
+    "strafe_run_l_a": {
+      "duration": 0.667,
+      "loop": true,
+      "category": "locomotion",
+      "speed": 4.01
+    },
+    "strafe_run_r_a": {
+      "duration": 0.667,
+      "loop": true,
+      "category": "locomotion",
+      "speed": 3.35
+    },
+    "strafe_walk_l_a": {
+      "duration": 1.033,
+      "loop": true,
+      "category": "locomotion",
+      "speed": 1.54
+    },
+    "strafe_walk_r_a": {
+      "duration": 1.033,
+      "loop": true,
+      "category": "locomotion",
+      "speed": 1.54
+    },
+    "run_stop_a": {
+      "duration": 0.9,
+      "loop": false,
+      "category": "transition"
+    },
+    "turn_to_run_a": {
+      "duration": 1.7,
+      "loop": false,
+      "category": "transition"
+    },
+    "change_dir_a": {
+      "duration": 2.167,
+      "loop": false,
+      "category": "transition"
+    },
+    "run_lookback_a": {
+      "duration": 2.233,
+      "loop": false,
+      "category": "transition"
+    },
+    "turn_180_a": {
+      "duration": 0.667,
+      "loop": false,
+      "category": "turn"
+    },
+    "sprint_turn_a": {
+      "duration": 1,
+      "loop": false,
+      "category": "turn"
+    },
+    "turn_l_a": {
+      "duration": 1.633,
+      "loop": false,
+      "category": "turn"
+    },
+    "turn_r_a": {
+      "duration": 1.633,
+      "loop": false,
+      "category": "turn"
+    },
+    "turn_l90_a": {
+      "duration": 0.9,
+      "loop": false,
+      "category": "turn"
+    },
+    "turn_r90_a": {
+      "duration": 0.933,
+      "loop": false,
+      "category": "turn"
+    },
+    "run_arc_fwd_a": {
+      "duration": 0.9,
+      "loop": false,
+      "category": "turn"
+    },
+    "run_arc_back_a": {
+      "duration": 0.667,
+      "loop": false,
+      "category": "turn"
+    }
+  },
+  "groups": {
+    "gk_ready": [
+      "idle_b"
+    ],
+    "jog": [
+      "jog_a"
+    ],
+    "pass": [
+      "pass_a",
+      "pass_b"
+    ],
+    "shoot": [
+      "shoot_a"
+    ],
+    "receive": [
+      "receive_a"
+    ],
+    "idle": [
+      "idle_relaxed_a",
+      "idle_relaxed_b",
+      "idle_relaxed_c",
+      "idle_relaxed_d"
+    ],
+    "walk": [
+      "walk_a"
+    ],
+    "run": [
+      "run_a"
+    ],
+    "sprint": [
+      "sprint_a"
+    ]
+  }
+}

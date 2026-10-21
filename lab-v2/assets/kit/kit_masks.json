@@ -1,0 +1,297 @@
+{
+ "size": 1024,
+ "channels": {
+  "stripes": {
+   "file": 0,
+   "channel": "r"
+  },
+  "hoops": {
+   "file": 0,
+   "channel": "g"
+  },
+  "halves": {
+   "file": 0,
+   "channel": "b"
+  },
+  "sash": {
+   "file": 1,
+   "channel": "r"
+  },
+  "sleeves": {
+   "file": 1,
+   "channel": "g"
+  }
+ },
+ "characters": {
+  "soccer-man-a": {
+   "material": "Shirt Soccer Man A",
+   "files": [
+    "soccer-man-a-masks-0.png",
+    "soccer-man-a-masks-1.png"
+   ],
+   "faces": 124,
+   "numberBox": {
+    "o": [
+     0.410178,
+     0.748087
+    ],
+    "ix": [
+     18.413043,
+     0.000429
+    ],
+    "iy": [
+     -4e-06,
+     -2.373764
+    ],
+    "box": {
+     "x": 0.0,
+     "top": 1.3378,
+     "w": 0.2093,
+     "h": 0.2242
+    }
+   },
+   "numberFit": [
+    0.0927,
+    0.0614
+   ],
+   "armFaces": 58,
+   "seam": 0.169,
+   "coverage": 22.38,
+   "chestSpanX": 0.3376,
+   "bands": 7,
+   "torsoSpanZ": 0.4873,
+   "secondaryShare": {
+    "stripes": 0.329,
+    "hoops": 0.284,
+    "halves": 0.302,
+    "sash": 0.218,
+    "sleeves": 0.388
+   }
+  },
+  "soccer-man-b": {
+   "material": "Shirt Soccer Man B",
+   "files": [
+    "soccer-man-b-masks-0.png",
+    "soccer-man-b-masks-1.png"
+   ],
+   "faces": 92,
+   "numberBox": {
+    "o": [
+     0.409022,
+     0.748279
+    ],
+    "ix": [
+     17.659601,
+     0.000328
+    ],
+    "iy": [
+     -4e-06,
+     -2.373211
+    ],
+    "box": {
+     "x": 0.0,
+     "top": 1.3378,
+     "w": 0.2242,
+     "h": 0.2242
+    }
+   },
+   "numberFit": [
+    0.0836,
+    0.0401
+   ],
+   "armFaces": 16,
+   "seam": 0.169,
+   "coverage": 17.87,
+   "chestSpanX": 0.3968,
+   "bands": 7,
+   "torsoSpanZ": 0.4873,
+   "secondaryShare": {
+    "stripes": 0.495,
+    "hoops": 0.374,
+    "halves": 0.425,
+    "sash": 0.324,
+    "sleeves": 0.143
+   }
+  },
+  "soccer-man-c": {
+   "material": "Shirt Soccer Man C",
+   "files": [
+    "soccer-man-c-masks-0.png",
+    "soccer-man-c-masks-1.png"
+   ],
+   "faces": 202,
+   "numberBox": {
+    "o": [
+     0.406258,
+     0.811182
+    ],
+    "ix": [
+     16.08958,
+     0.000303
+    ],
+    "iy": [
+     -3e-06,
+     -2.046666
+    ],
+    "box": {
+     "x": 0.0,
+     "top": 1.3708,
+     "w": 0.246,
+     "h": 0.2584
+    }
+   },
+   "numberFit": [
+    0.0836,
+    0.0428
+   ],
+   "armFaces": 108,
+   "seam": 0.169,
+   "coverage": 25.81,
+   "chestSpanX": 0.3968,
+   "bands": 7,
+   "torsoSpanZ": 0.5617,
+   "secondaryShare": {
+    "stripes": 0.371,
+    "hoops": 0.306,
+    "halves": 0.318,
+    "sash": 0.243,
+    "sleeves": 0.353
+   }
+  },
+  "soccer-woman-a": {
+   "material": "Shirt Soccer Woman A",
+   "files": [
+    "soccer-woman-a-masks-0.png",
+    "soccer-woman-a-masks-1.png"
+   ],
+   "faces": 144,
+   "numberBox": {
+    "o": [
+     0.40639,
+     0.734345
+    ],
+    "ix": [
+     16.007113,
+     -0.000986
+    ],
+    "iy": [
+     -0.020674,
+     -2.22319
+    ],
+    "box": {
+     "x": 0.0,
+     "top": 1.2659,
+     "w": 0.1707,
+     "h": 0.1917
+    }
+   },
+   "numberFit": [
+    0.0612,
+    0.0682
+   ],
+   "armFaces": 50,
+   "seam": 0.1384,
+   "coverage": 22.35,
+   "chestSpanX": 0.2753,
+   "bands": 7,
+   "torsoSpanZ": 0.4166,
+   "secondaryShare": {
+    "stripes": 0.369,
+    "hoops": 0.299,
+    "halves": 0.341,
+    "sash": 0.251,
+    "sleeves": 0.319
+   }
+  },
+  "soccer-woman-b": {
+   "material": "Shirt Soccer Woman B",
+   "files": [
+    "soccer-woman-b-masks-0.png",
+    "soccer-woman-b-masks-1.png"
+   ],
+   "faces": 110,
+   "numberBox": {
+    "o": [
+     0.407073,
+     0.73434
+    ],
+    "ix": [
+     16.36506,
+     -0.000563
+    ],
+    "iy": [
+     -0.006339,
+     -2.224683
+    ],
+    "box": {
+     "x": 0.0,
+     "top": 1.2659,
+     "w": 0.1707,
+     "h": 0.1917
+    }
+   },
+   "numberFit": [
+    0.1193,
+    0.068
+   ],
+   "armFaces": 18,
+   "seam": 0.1384,
+   "coverage": 18.17,
+   "chestSpanX": 0.2753,
+   "bands": 7,
+   "torsoSpanZ": 0.4166,
+   "secondaryShare": {
+    "stripes": 0.455,
+    "hoops": 0.367,
+    "halves": 0.409,
+    "sash": 0.305,
+    "sleeves": 0.163
+   }
+  },
+  "soccer-woman-c": {
+   "material": "Shirt Soccer Woman C",
+   "files": [
+    "soccer-woman-c-masks-0.png",
+    "soccer-woman-c-masks-1.png"
+   ],
+   "faces": 226,
+   "numberBox": {
+    "o": [
+     0.405545,
+     0.750854
+    ],
+    "ix": [
+     15.586805,
+     3.9e-05
+    ],
+    "iy": [
+     -3e-06,
+     -2.265419
+    ],
+    "box": {
+     "x": 0.0,
+     "top": 1.2746,
+     "w": 0.1737,
+     "h": 0.1889
+    }
+   },
+   "numberFit": [
+    0.0496,
+    0.0749
+   ],
+   "armFaces": 126,
+   "seam": 0.1384,
+   "coverage": 24.32,
+   "chestSpanX": 0.2802,
+   "bands": 7,
+   "torsoSpanZ": 0.4107,
+   "secondaryShare": {
+    "stripes": 0.324,
+    "hoops": 0.269,
+    "halves": 0.29,
+    "sash": 0.22,
+    "sleeves": 0.406
+   }
+  }
+ }
+}
